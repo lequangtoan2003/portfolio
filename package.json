@@ -10,8 +10,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "check": "pnpm typecheck && pnpm build",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:html": "node scripts/validate-html.mjs",
+    "check": "pnpm lint && pnpm validate:content && pnpm typecheck && pnpm build && pnpm validate:html",
     "commitlint": "commitlint",
     "prepare": "husky"
   },
@@ -28,6 +31,8 @@
     "@types/node": "24.2.0",
     "@types/react": "19.1.9",
     "@types/react-dom": "19.1.7",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.0",
     "husky": "9.1.7",
     "typescript": "5.9.2"
   }

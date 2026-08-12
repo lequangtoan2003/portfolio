@@ -28,11 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck
-        run: pnpm typecheck
-
-      - name: Build
-        run: pnpm build
+      - name: Project checks
+        run: pnpm check
 
       - name: Check commit messages
         shell: bash
