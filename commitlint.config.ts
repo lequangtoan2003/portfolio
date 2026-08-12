@@ -1,4 +1,4 @@
-export default {
+const commitlintConfig = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     "scope-empty": [2, "always"],
@@ -7,3 +7,5 @@ export default {
     "type-enum": [2, "always", ["feat", "fix", "chore"]],
   },
 };
+
+export default commitlintConfig;
