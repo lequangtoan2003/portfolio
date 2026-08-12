@@ -1,0 +1,56 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    name: Typecheck, build, and commit message
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Check commit messages
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+          fi
+
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            range="${{ github.sha }}"
+          fi
+
+          git log --format=%s "$range" | while IFS= read -r message; do
+            if [[ ! "$message" =~ ^(feat|fix|chore):\ .+ ]]; then
+              echo "Invalid commit message: $message"
+              echo "Expected format: feat: ..., fix: ..., or chore: ..."
+              exit 1
+            fi
+          done
