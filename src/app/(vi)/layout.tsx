@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import { DeviceModeMarker } from "@/components/DeviceModeMarker";
+import { contentFont, headingFont } from "@/app/fonts";
+import { portfolioContent } from "@/content/portfolio";
 
 const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
+const content = portfolioContent.vi;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Hello world | Portfolio",
-  description: "Trang khởi tạo portfolio cá nhân.",
+  title: content.seo.title,
+  description: content.seo.description,
   alternates: {
     canonical: "/",
     languages: {
@@ -23,8 +27,11 @@ export default function ViRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
-      <body>{children}</body>
+    <html lang="vi" className={`${contentFont.variable} ${headingFont.variable}`}>
+      <body>
+        <DeviceModeMarker />
+        {children}
+      </body>
     </html>
   );
 }

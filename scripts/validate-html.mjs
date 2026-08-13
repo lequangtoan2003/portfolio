@@ -67,7 +67,7 @@ for (const page of pages) {
       );
     }
 
-    if (heading.level === 2 && heading.id === "work") {
+    if (heading.level === 2 && (heading.id === "work" || /^(work|công việc)$/i.test(heading.text))) {
       workSectionSeen = true;
     }
 
