@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroLightScene } from "@/components/HeroLightScene";
 import { contactLinks, type Locale, portfolioContent } from "@/content/portfolio";
 
 type PortfolioPageProps = {
@@ -30,36 +31,39 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
 
       <main>
         <section id="home" className="hero-section" aria-labelledby="home-title">
-          <div className="hero-copy">
-            <p className="eyebrow">{content.hero.eyebrow}</p>
-            <h1 id="home-title">{content.hero.title}</h1>
-            <p className="hero-summary">{content.hero.summary}</p>
-            <div className="hero-actions" aria-label={content.accessibility.quickLinks}>
-              <Link className="button primary" href={`${content.homePath}#work`}>
-                {content.hero.primaryCta}
-              </Link>
-              <Link className="button secondary" href={`${content.homePath}#contact`}>
-                {content.hero.secondaryCta}
-              </Link>
+          <HeroLightScene />
+          <div className="hero-content">
+            <div className="hero-copy">
+              <p className="eyebrow">{content.hero.eyebrow}</p>
+              <h1 id="home-title">{content.hero.title}</h1>
+              <p className="hero-summary">{content.hero.summary}</p>
+              <div className="hero-actions" aria-label={content.accessibility.quickLinks}>
+                <Link className="button primary" href={`${content.homePath}#work`}>
+                  {content.hero.primaryCta}
+                </Link>
+                <Link className="button secondary" href={`${content.homePath}#contact`}>
+                  {content.hero.secondaryCta}
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="hero-panel" aria-label={content.accessibility.profileSummary}>
-            <div className="panel-header">
-              <span>Product stack</span>
-              <span>2026</span>
-            </div>
-            <div className="panel-main">
-              <span>React</span>
-              <span>Next.js</span>
-              <span>Vue</span>
-              <span>Node.js</span>
-              <span>Electron</span>
-              <span>Automation</span>
-            </div>
-            <div className="panel-footer">
-              <span>Web app</span>
-              <span>Desktop app</span>
-              <span>SEO/GEO</span>
+            <div className="hero-panel" aria-label={content.accessibility.profileSummary}>
+              <div className="panel-header">
+                <span>Product stack</span>
+                <span>2026</span>
+              </div>
+              <div className="panel-main">
+                <span>React</span>
+                <span>Next.js</span>
+                <span>Vue</span>
+                <span>Node.js</span>
+                <span>Electron</span>
+                <span>Automation</span>
+              </div>
+              <div className="panel-footer">
+                <span>Web app</span>
+                <span>Desktop app</span>
+                <span>SEO/GEO</span>
+              </div>
             </div>
           </div>
         </section>
