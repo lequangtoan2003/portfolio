@@ -7,3 +7,4 @@ out
 docs
 *.log
 *.tsbuildinfo
+artifacts/ui-check

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import { CustomCursor } from "@/components/CustomCursor";
 import { DeviceModeMarker } from "@/components/DeviceModeMarker";
 import { contentFont, headingFont } from "@/app/fonts";
 import { portfolioContent } from "@/content/portfolio";
@@ -30,6 +31,7 @@ export default function EnRootLayout({
     <html lang="en" className={`${contentFont.variable} ${headingFont.variable}`}>
       <body>
         <DeviceModeMarker />
+        <CustomCursor />
         {children}
       </body>
     </html>
