@@ -27,6 +27,16 @@ type ExperienceItem = {
   summary: string;
 };
 
+type AboutStat = {
+  value: string;
+  label: string;
+};
+
+type AboutValueCard = {
+  title: string;
+  description: string;
+};
+
 type PortfolioContent = {
   locale: Locale;
   homePath: "/" | "/en";
@@ -44,6 +54,10 @@ type PortfolioContent = {
     primaryCta: string;
     secondaryCta: string;
   };
+  skills: {
+    title: string;
+    summary: string;
+  };
   work: {
     title: string;
     summary: string;
@@ -59,7 +73,12 @@ type PortfolioContent = {
   about: {
     title: string;
     summary: string;
-    points: string[];
+    avatarUrl: string;
+    avatarAlt: string;
+    stats: AboutStat[];
+    statusBadge?: string;
+    tags?: string[];
+    values: AboutValueCard[];
   };
   contact: {
     title: string;
@@ -77,17 +96,6 @@ type PortfolioContent = {
   footer: string;
 };
 
-const sharedNavIds = ["home", "work", "stack", "about", "contact"] as const;
-
-function localizedAnchors(locale: Locale, labels: string[]): NavItem[] {
-  const prefix = locale === "vi" ? "/" : "/en";
-
-  return sharedNavIds.map((id, index) => ({
-    label: labels[index],
-    href: `${prefix}#${id}`,
-  }));
-}
-
 export const portfolioContent: Record<Locale, PortfolioContent> = {
   vi: {
     locale: "vi",
@@ -95,21 +103,32 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     alternatePath: "/en",
     alternateLabel: "English",
     seo: {
-      title: "Le Quang Toan | Full-stack Web Fresher",
+      title: "Lê Quang Toàn | Full-stack Web Fresher",
       description:
         "Portfolio của Lê Quang Toàn, lập trình viên Full-stack Web Fresher tập trung vào React, Next.js, Vue, Node.js và ứng dụng desktop automation.",
     },
-    nav: localizedAnchors("vi", ["Trang chủ", "Công việc", "Stack", "Giới thiệu", "Liên hệ"]),
+    nav: [
+      { label: "Trang Chủ", href: "/#home" },
+      { label: "Giới thiệu", href: "/#about" },
+      { label: "Kỹ Năng", href: "/#stack" },
+      { label: "Dự Án", href: "/#work" },
+      { label: "Liên Hệ", href: "/#contact" },
+    ],
     hero: {
       eyebrow: "Full-stack Web Fresher",
-      title: "Le Quang Toan",
+      title: "Lê Quang Toàn",
       summary:
         "Lập trình viên Full-stack Web Fresher tại Đà Nẵng, tập trung xây dựng web app và desktop app có kiến trúc rõ ràng, dễ bảo trì và gắn với trải nghiệm người dùng.",
       primaryCta: "Xem công việc",
       secondaryCta: "Liên hệ",
     },
+    skills: {
+      title: "Kỹ Năng",
+      summary:
+        "Các kỹ năng chuyên môn và công nghệ tôi sử dụng trong quá trình phát triển sản phẩm web, backend và ứng dụng desktop.",
+    },
     work: {
-      title: "Công việc",
+      title: "Dự Án",
       summary:
         "Kinh nghiệm của tôi nằm ở giao điểm giữa frontend hiện đại, backend Node.js và các workflow desktop automation cần tính ổn định trong môi trường sản phẩm thật.",
       coreSkillsTitle: "Kỹ năng chính",
@@ -199,11 +218,46 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     about: {
       title: "Giới thiệu",
       summary:
-        "Tôi thích cách tiếp cận có hệ thống: tách lớp rõ ràng, giữ code dễ đọc và xây dựng tính năng với suy nghĩ về vận hành thật sau khi release.",
-      points: [
-        "Ưu tiên clean architecture và khả năng bảo trì.",
-        "Có kinh nghiệm làm việc với frontend, backend, desktop runtime và automation.",
-        "Đọc/viết tài liệu kỹ thuật tiếng Anh tốt, giao tiếp cơ bản.",
+        "Tôi là Fullstack Developer với hơn 1 năm kinh nghiệm, chuyên nhận phát triển các web bán hàng, landing page, web chat nội bộ, app desktop nội bộ, SaaS và tự động hóa quy trình (Automation). Thành thạo các công nghệ như Node.js, React, Next.js, Vue, JavaScript, TypeScript và các công nghệ hiện đại khác.\n\nĐã triển khai thành công nhiều dự án lớn nhỏ như Invibrowser (Trình duyệt Anti-detect), 1Clickdown (nền tảng tự động hóa quy trình) cùng các dự án web đặt phòng, quản lý khách sạn, clone Instagram và landing page khác. Tôi cam kết mang đến giải pháp tối ưu, code chất lượng cao và hỗ trợ tận tình cho mọi dự án.",
+      avatarUrl: "/developer-avatar.png",
+      avatarAlt: "Lê Quang Toàn - Full-stack Web Developer",
+      stats: [
+        { value: "1+", label: "Năm Kinh Nghiệm" },
+        { value: "24/7", label: "Hỗ Trợ Liên Tục" },
+      ],
+      statusBadge: "Sẵn sàng nhận dự án mới",
+      tags: ["Fullstack Web", "Desktop SaaS", "Automation", "Clean Code"],
+      values: [
+        {
+          title: "Code Sạch",
+          description:
+            "Tôi viết code dễ đọc, dễ bảo trì và có khả năng mở rộng tốt, tuân thủ các nguyên tắc thiết kế hệ thống chuẩn mực.",
+        },
+        {
+          title: "Thiết Kế Đẹp",
+          description:
+            "Tôi tin vào việc tạo ra giao diện người dùng tối ưu UI/UX, thu hút về mặt thị giác và mang lại trải nghiệm mượt mà.",
+        },
+        {
+          title: "Hiệu Suất",
+          description:
+            "Tôi tối ưu hóa tốc độ tải trang, luồng xử lý dữ liệu và tự động hóa các tác vụ phức tạp một cách hiệu quả.",
+        },
+        {
+          title: "Hợp Tác",
+          description:
+            "Tôi làm việc tốt trong môi trường nhóm, giao tiếp rõ ràng và chủ động kết nối với các bên liên quan.",
+        },
+        {
+          title: "Đam Mê",
+          description:
+            "Tôi đam mê công nghệ và liên tục cập nhật các giải pháp, công nghệ mới nhất để áp dụng vào sản phẩm thực tế.",
+        },
+        {
+          title: "Sáng Tạo",
+          description:
+            "Tôi yêu thích thử thách, giải quyết các bài toán kỹ thuật phức tạp và đưa ra giải pháp sáng tạo, tối ưu.",
+        },
       ],
     },
     contact: {
@@ -220,7 +274,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       quickLinks: "Liên kết nhanh",
       profileSummary: "Thông tin tóm tắt",
     },
-    footer: "Le Quang Toan Portfolio 2026",
+    footer: "Lê Quang Toàn Portfolio 2026",
   },
   en: {
     locale: "en",
@@ -232,7 +286,13 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       description:
         "Portfolio of Le Quang Toan, a Full-stack Web Fresher focused on React, Next.js, Vue, Node.js, and automation-heavy desktop applications.",
     },
-    nav: localizedAnchors("en", ["Home", "Work", "Stack", "About", "Contact"]),
+    nav: [
+      { label: "Home", href: "/en#home" },
+      { label: "About", href: "/en#about" },
+      { label: "Skills", href: "/en#stack" },
+      { label: "Projects", href: "/en#work" },
+      { label: "Contact", href: "/en#contact" },
+    ],
     hero: {
       eyebrow: "Full-stack Web Fresher",
       title: "Le Quang Toan",
@@ -241,8 +301,13 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       primaryCta: "View work",
       secondaryCta: "Contact",
     },
+    skills: {
+      title: "Skills",
+      summary:
+        "Technical skills and core stack I leverage to build web applications, APIs, and desktop automation tools.",
+    },
     work: {
-      title: "Work",
+      title: "Projects",
       summary:
         "My experience sits between modern frontend, Node.js backends, and desktop automation workflows that need reliability in real product environments.",
       coreSkillsTitle: "Core Skills",
@@ -332,11 +397,46 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     about: {
       title: "About",
       summary:
-        "I like a system-oriented way of building: clear boundaries, readable code, and features designed with real operations after release in mind.",
-      points: [
-        "Prioritizes clean architecture and maintainability.",
-        "Works across frontend, backend, desktop runtime, and automation.",
-        "Comfortable reading and writing technical documentation in English, with basic communication.",
+        "I am a Full-stack Developer with over 1 year of experience, specializing in custom development of e-commerce platforms, landing pages, internal chat systems, desktop SaaS applications, and workflow automation. Proficient in modern technologies including Node.js, React, Next.js, Vue, JavaScript, and TypeScript.\n\nI have successfully delivered diverse projects such as Invibrowser (Anti-detect browser), 1Clickdown (workflow automation platform), hotel booking systems, Instagram clones, and high-performance landing pages. I am dedicated to delivering optimal solutions, clean code, and committed support for every project.",
+      avatarUrl: "/developer-avatar.png",
+      avatarAlt: "Le Quang Toan - Full-stack Web Developer",
+      stats: [
+        { value: "1+", label: "Years Experience" },
+        { value: "24/7", label: "Dedicated Support" },
+      ],
+      statusBadge: "Available for new projects",
+      tags: ["Fullstack Web", "Desktop SaaS", "Automation", "Clean Code"],
+      values: [
+        {
+          title: "Clean Code",
+          description:
+            "I write readable, scalable, and maintainable code adhering to solid system design principles.",
+        },
+        {
+          title: "Beautiful Design",
+          description:
+            "I focus on modern UI/UX design, creating visually engaging and intuitive user interfaces.",
+        },
+        {
+          title: "Performance",
+          description:
+            "I optimize application loading speed, data processing flows, and background automation tasks.",
+        },
+        {
+          title: "Collaboration",
+          description:
+            "I thrive in team environments, communicate clearly with stakeholders, and proactively solve issues.",
+        },
+        {
+          title: "Passion",
+          description:
+            "I am passionate about technology and constantly learn modern techniques to apply to real products.",
+        },
+        {
+          title: "Creativity",
+          description:
+            "I enjoy tackling complex technical challenges and finding creative, effective solutions.",
+        },
       ],
     },
     contact: {

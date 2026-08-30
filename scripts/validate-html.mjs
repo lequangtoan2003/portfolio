@@ -55,7 +55,7 @@ for (const page of pages) {
   assert(h1Count === 1, `${page.route} must have exactly one H1. Found ${h1Count}.`);
 
   let previousLevel = 0;
-  let workSectionSeen = false;
+  let stackSectionSeen = false;
 
   for (const heading of headings) {
     assert(heading.text.length > 0, `${page.route} has an empty H${heading.level}.`);
@@ -67,17 +67,14 @@ for (const page of pages) {
       );
     }
 
-    if (heading.level === 2 && (heading.id === "work" || /^(work|công việc)$/i.test(heading.text))) {
-      workSectionSeen = true;
-    }
-
-    if (heading.id === "stack" || /^tech stack$/i.test(heading.text)) {
-      assert(heading.level === 3, `${page.route} Tech Stack must be an H3.`);
-      assert(workSectionSeen, `${page.route} Tech Stack must be inside/after the Work H2 section.`);
+    if (heading.level === 2 && (heading.id === "stack-title" || /^(kỹ năng|skills)$/i.test(heading.text))) {
+      stackSectionSeen = true;
     }
 
     previousLevel = heading.level;
   }
+
+  assert(stackSectionSeen, `${page.route} must contain a Skills H2 section.`);
 }
 
 console.log("HTML validation passed.");
