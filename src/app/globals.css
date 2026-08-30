@@ -838,7 +838,13 @@ h4 {
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.section-heading p {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .subsection + .subsection {
@@ -941,6 +947,892 @@ h4 {
 
 .split-section .section-heading {
   margin-bottom: 0;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .about-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+}
+
+.about-hanging-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 100%;
+  padding-top: 6px;
+  transform-origin: 50% 14px; /* Tâm xoay chuẩn tại vị trí đinh đóng tường */
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-hanging-wrapper:hover {
+  transform: rotate(-0.75deg);
+}
+
+.hanging-nail {
+  position: relative;
+  z-index: 5;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #f8fafc 0%, #64748b 60%, #1e293b 100%);
+  border: 2px solid #0f172a;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.9);
+  margin-bottom: -10px;
+}
+
+.hanging-nail-head {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #0f172a;
+  transform: translate(-50%, -50%);
+}
+
+.hanging-rope-svg {
+  width: 220px;
+  height: 38px;
+  overflow: visible;
+  z-index: 3;
+  margin-bottom: -4px;
+  color: #57534e;
+}
+
+.hanging-rope-line {
+  stroke: #57534e;
+  stroke-dasharray: 4 2;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+.hanging-eyelet {
+  position: absolute;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #e2e8f0 0%, #475569 100%);
+  border: 2px solid #1e293b;
+  z-index: 4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.eyelet-left {
+  left: 40px;
+}
+
+.eyelet-right {
+  right: 40px;
+}
+
+.about-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 26px;
+  border: 2px solid #18181b;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow:
+    8px 10px 0px #18181b,
+    0 20px 32px -6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  height: fit-content;
+  width: 100%;
+  transition:
+    box-shadow 300ms ease,
+    border-color 220ms ease;
+}
+
+.about-hanging-wrapper:hover .about-left,
+.about-left:hover {
+  box-shadow:
+    10px 14px 0px #18181b,
+    0 26px 44px -6px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.about-left-header {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+}
+
+.about-avatar-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 3px solid var(--surface);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
+  flex-shrink: 0;
+}
+
+.about-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-avatar-status {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #10b981;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.about-stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  height: 100%;
+  min-height: 96px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgb(23 23 21 / 2%);
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms ease;
+}
+
+.about-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 65%, var(--line));
+  box-shadow:
+    0 8px 20px rgb(23 23 21 / 6%),
+    0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.about-stat-value {
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.about-stat-label {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.about-left-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-description-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.about-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.about-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.about-tag-pill:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.about-status-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.about-status-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: status-pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes status-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-left-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-stats-grid {
+    width: 100%;
+  }
+}
+
+.about-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .about-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Window Cards Grid (Mac OS / Developer Studio Widgets - 3D Staggered)
+   ========================================================================== */
+
+.about-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  perspective: 1200px;
+  padding: 14px 10px 24px;
+}
+
+@media (min-width: 640px) {
+  .about-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 22px;
+    row-gap: 26px;
+  }
+}
+
+.window-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 0, 0, 0.14);
+  box-shadow:
+    0 16px 36px -6px rgba(0, 0, 0, 0.16),
+    0 6px 14px -2px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform-origin: center center;
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms ease,
+    z-index 0ms;
+}
+
+/* Hiệu ứng lớp sáng bóng (Glass glare sheen overlay) */
+.window-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.05) 35%,
+    transparent 60%
+  );
+  z-index: 2;
+}
+
+/* Đổ bóng ambient shadow 3D dưới đáy thẻ */
+.window-card::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 6%;
+  right: 6%;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.18);
+  filter: blur(10px);
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+/* ==========================================
+   Góc nghiêng so le (Staggered Tilt & Offsets)
+   ========================================== */
+
+/* Mobile tilts */
+.window-card-0 { transform: rotate(-1.5deg); }
+.window-card-1 { transform: rotate(1.8deg); }
+.window-card-2 { transform: rotate(-1.2deg); }
+.window-card-3 { transform: rotate(2deg); }
+.window-card-4 { transform: rotate(-1.8deg); }
+.window-card-5 { transform: rotate(1.5deg); }
+
+/* Desktop Stagger & Tilts matching the reference */
+@media (min-width: 640px) {
+  /* Cột bên trái */
+  .window-card-0 {
+    transform: rotate(-2deg) translateY(-2px);
+  }
+  .window-card-2 {
+    transform: rotate(1.6deg) translateY(4px);
+  }
+  .window-card-4 {
+    transform: rotate(-2.2deg) translateY(8px);
+  }
+
+  /* Cột bên phải (so le thụt xuống) */
+  .window-card-1 {
+    transform: rotate(2.2deg) translateY(12px);
+  }
+  .window-card-3 {
+    transform: rotate(-1.6deg) translateY(18px);
+  }
+  .window-card-5 {
+    transform: rotate(2.5deg) translateY(24px);
+  }
+}
+
+/* Hiệu ứng hover nhấc bổng thẻ và căn thẳng mượt mà */
+.window-card:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.03) !important;
+  z-index: 10;
+  box-shadow:
+    0 26px 50px -8px rgba(0, 0, 0, 0.26),
+    0 10px 22px -4px rgba(0, 0, 0, 0.14),
+    0 0 0 2px var(--accent);
+}
+
+.window-card:hover::after {
+  transform: translateY(4px) scale(1.08);
+  opacity: 0.8;
+  filter: blur(14px);
+}
+
+.window-card-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12px 12px 0 0;
+}
+
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.window-dot {
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 999px;
+  display: inline-block;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.dot-red {
+  background: #ff5f56;
+}
+
+.dot-yellow {
+  background: #ffbd2e;
+}
+
+.dot-green {
+  background: #27c93f;
+}
+
+.window-domain {
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--muted);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+.window-card-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 1;
+  border-radius: 0 0 12px 12px;
+}
+
+.window-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.window-card-title-group {
+  flex: 1;
+}
+
+.window-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+}
+
+.window-card-desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.window-card-visual {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================
+   Từng thẻ cụ thể (Theme & Visual Styles)
+   ========================================== */
+
+/* Card 0: Code Sạch (Clean Code - Dark Terminal / IDE) */
+.window-card-0 {
+  background: #14151e;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.window-card-0::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 65%
+  );
+}
+
+.window-card-0 .window-card-header {
+  background: #0c0d14;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.window-card-0 .window-domain {
+  color: #94a3b8;
+}
+
+.window-card-0 .window-card-title {
+  color: #f8fafc;
+}
+
+.window-card-0 .window-card-desc {
+  color: #94a3b8;
+}
+
+.visual-ide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.visual-avatar-orb.orb-purple {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+  flex-shrink: 0;
+}
+
+.visual-ide-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.ide-bar.bar-long {
+  height: 6px;
+  border-radius: 3px;
+  background: #312e81;
+  width: 85%;
+}
+
+.ide-bar.bar-short {
+  height: 6px;
+  border-radius: 3px;
+  background: #4338ca;
+  width: 55%;
+}
+
+/* Card 1: Thiết Kế Đẹp (Beautiful Design - Soft Peach) */
+.window-card-1 {
+  background: linear-gradient(135deg, #fed7aa 0%, #ffedd5 100%);
+  border-color: #fb923c;
+}
+
+.window-card-1 .window-card-header {
+  background: rgba(253, 186, 116, 0.45);
+  border-color: rgba(67, 20, 7, 0.1);
+}
+
+.window-card-1 .window-domain {
+  color: #9a3412;
+}
+
+.window-card-1 .window-card-title {
+  color: #431407;
+}
+
+.window-card-1 .window-card-desc {
+  color: #7c2d12;
+}
+
+.visual-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.visual-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #7c2d12;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Card 2: Hiệu Suất (Performance - Deep Navy Chart) */
+.window-card-2 {
+  background: linear-gradient(135deg, #091224 0%, #1e3a8a 100%);
+  border-color: #2563eb;
+}
+
+.window-card-2::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 65%
+  );
+}
+
+.window-card-2 .window-card-header {
+  background: #060b17;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.window-card-2 .window-domain {
+  color: #93c5fd;
+}
+
+.window-card-2 .window-card-title {
+  color: #f8fafc;
+}
+
+.window-card-2 .window-card-desc {
+  color: #bfdbfe;
+}
+
+.window-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.visual-chart {
+  width: 100%;
+  padding: 8px 4px 4px;
+}
+
+.visual-chart-line {
+  position: relative;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #facc15, #ffffff, #60a5fa);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-node {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.node-yellow {
+  background: #facc15;
+  color: #facc15;
+  transform: translateY(-4px);
+}
+
+.node-white {
+  background: #ffffff;
+  color: #ffffff;
+  transform: translateY(0px);
+}
+
+.node-blue {
+  background: #60a5fa;
+  color: #60a5fa;
+  transform: translateY(4px);
+}
+
+/* Card 3: Hợp Tác (Collaboration - Grid Flow Map) */
+.window-card-3 {
+  background: #fefce8;
+  background-image: radial-gradient(#d4d4d8 1px, transparent 1px);
+  background-size: 10px 10px;
+  border-color: #eab308;
+}
+
+.window-card-3 .window-card-header {
+  background: rgba(254, 240, 138, 0.5);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.window-card-3 .window-domain {
+  color: #71717a;
+}
+
+.window-card-3 .window-card-title {
+  color: #18181b;
+}
+
+.window-card-3 .window-card-desc {
+  color: #52525b;
+}
+
+.visual-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 0 2px;
+}
+
+.flow-block {
+  width: 36px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid #18181b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.flow-block.block-white {
+  background: #ffffff;
+}
+
+.flow-block.block-yellow {
+  background: #facc15;
+}
+
+.flow-connector {
+  flex: 1;
+  height: 2px;
+  background: #18181b;
+  margin: 0 -1px;
+}
+
+/* Card 4: Đam Mê (Passion - Soft Rose) */
+.window-card-4 {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+  border-color: #f472b6;
+}
+
+.window-card-4 .window-card-header {
+  background: rgba(251, 207, 232, 0.6);
+  border-color: rgba(131, 24, 67, 0.1);
+}
+
+.window-card-4 .window-domain {
+  color: #9d174d;
+}
+
+.window-card-4 .window-card-title {
+  color: #831843;
+}
+
+.window-card-4 .window-card-desc {
+  color: #9d174d;
+}
+
+.visual-growth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.visual-avatar-orb.orb-gradient {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #67e8f9, #f472b6);
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+  flex-shrink: 0;
+}
+
+.visual-growth-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.growth-bar.bar-wide {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  width: 90%;
+}
+
+.growth-bar.bar-med {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.7);
+  width: 60%;
+}
+
+/* Card 5: Sáng Tạo (Creativity - Modern Blocks) */
+.window-card-5 {
+  background: #f4f4f5;
+  border-color: #d4d4d8;
+}
+
+.window-card-5 .window-card-header {
+  background: #e4e4e7;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.window-card-5 .window-domain {
+  color: #71717a;
+}
+
+.window-card-5 .window-card-title {
+  color: #18181b;
+}
+
+.window-card-5 .window-card-desc {
+  color: #52525b;
+}
+
+.visual-blocks {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  padding: 2px 0;
+}
+
+.module-block {
+  flex: 1;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid #18181b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.module-block.block-light {
+  background: #ffffff;
+}
+
+.module-block.block-orange {
+  background: #f97316;
 }
 
 .section-body {
