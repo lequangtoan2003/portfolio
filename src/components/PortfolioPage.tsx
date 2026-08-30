@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroLightScene } from "@/components/HeroLightScene";
-import { contactLinks, type Locale, portfolioContent } from "@/content/portfolio";
+import {
+  contactLinks,
+  type Locale,
+  portfolioContent,
+} from "@/content/portfolio";
 
 type PortfolioPageProps = {
   locale: Locale;
@@ -12,7 +16,10 @@ type PortfolioPageProps = {
 export function PortfolioPage({ locale }: PortfolioPageProps) {
   const content = portfolioContent[locale];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     const hashIndex = href.indexOf("#");
     if (hashIndex !== -1) {
       const targetId = href.substring(hashIndex + 1);
@@ -54,14 +61,21 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
       </header>
 
       <main>
-        <section id="home" className="hero-section" aria-labelledby="home-title">
+        <section
+          id="home"
+          className="hero-section"
+          aria-labelledby="home-title"
+        >
           <HeroLightScene />
           <div className="hero-content">
             <div className="hero-copy">
               <p className="eyebrow">{content.hero.eyebrow}</p>
               <h1 id="home-title">{content.hero.title}</h1>
               <p className="hero-summary">{content.hero.summary}</p>
-              <div className="hero-actions" aria-label={content.accessibility.quickLinks}>
+              <div
+                className="hero-actions"
+                aria-label={content.accessibility.quickLinks}
+              >
                 <Link
                   className="button primary"
                   href={`${content.homePath}#work`}
@@ -72,13 +86,18 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
                 <Link
                   className="button secondary"
                   href={`${content.homePath}#contact`}
-                  onClick={(e) => handleNavClick(e, `${content.homePath}#contact`)}
+                  onClick={(e) =>
+                    handleNavClick(e, `${content.homePath}#contact`)
+                  }
                 >
                   {content.hero.secondaryCta}
                 </Link>
               </div>
             </div>
-            <div className="hero-panel" aria-label={content.accessibility.profileSummary}>
+            <div
+              className="hero-panel"
+              aria-label={content.accessibility.profileSummary}
+            >
               <div className="panel-header">
                 <span>Product stack</span>
                 <span>2026</span>
@@ -100,7 +119,11 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
           </div>
         </section>
 
-        <section id="about" className="section about-section" aria-labelledby="about-title">
+        <section
+          id="about"
+          className="section about-section"
+          aria-labelledby="about-title"
+        >
           <div className="section-heading">
             <h2 id="about-title">{content.about.title}</h2>
           </div>
@@ -143,8 +166,14 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
 
               {/* Chiếc bảng treo (Card bên trái) */}
               <div className="about-left hanging-board">
-                <span className="hanging-eyelet eyelet-left" aria-hidden="true" />
-                <span className="hanging-eyelet eyelet-right" aria-hidden="true" />
+                <span
+                  className="hanging-eyelet eyelet-left"
+                  aria-hidden="true"
+                />
+                <span
+                  className="hanging-eyelet eyelet-right"
+                  aria-hidden="true"
+                />
 
                 <div className="about-left-header">
                   <div className="about-avatar-wrapper">
@@ -168,11 +197,13 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
                 </div>
                 <div className="about-left-body">
                   <div className="about-description-paragraphs">
-                    {content.about.summary.split("\n\n").map((paragraph, index) => (
-                      <p className="about-description" key={index}>
-                        {paragraph}
-                      </p>
-                    ))}
+                    {content.about.summary
+                      .split("\n\n")
+                      .map((paragraph, index) => (
+                        <p className="about-description" key={index}>
+                          {paragraph}
+                        </p>
+                      ))}
                   </div>
                   {content.about.tags && (
                     <div className="about-tags-row">
@@ -204,7 +235,10 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
                     "creative.lab.dev",
                   ];
                   return (
-                    <article className={`window-card window-card-${index}`} key={card.title}>
+                    <article
+                      className={`window-card window-card-${index}`}
+                      key={card.title}
+                    >
                       <div className="window-card-header">
                         <div className="window-dots">
                           <span className="window-dot dot-red" />
@@ -217,7 +251,9 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
                         <div className="window-card-top">
                           <div className="window-card-title-group">
                             <h3 className="window-card-title">{card.title}</h3>
-                            <p className="window-card-desc">{card.description}</p>
+                            <p className="window-card-desc">
+                              {card.description}
+                            </p>
                           </div>
                           {index === 2 && (
                             <span className="window-badge-pill">99% Speed</span>
@@ -296,31 +332,214 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
             <p>{content.skills.summary}</p>
           </div>
 
-          <div className="subsection">
-            <h3>{content.work.coreSkillsTitle}</h3>
-            <div className="skill-grid">
-              {content.skillGroups.map((group) => (
-                <article className="compact-card" key={group.title}>
-                  <h4>{group.title}</h4>
-                  <ul className="tag-list">
-                    {group.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
+          <div className="skills-ide-stage">
+            {/* The 3-box Card Grid with Crisp White Borders */}
+            <div className="skills-ide-grid">
+              {content.skillCards.map((card) => {
+                return (
+                  <article
+                    className={`skill-ide-card card-${card.id}`}
+                    key={card.id}
+                  >
+                    <div className="skill-ide-header">
+                      <div className="skill-icon-wrapper">
+                        {card.icon === "monitor" && (
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="skill-icon"
+                            aria-hidden="true"
+                          >
+                            <rect x="2" y="3" width="20" height="14" rx="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                          </svg>
+                        )}
+                        {card.icon === "react" && (
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            className="skill-icon"
+                            aria-hidden="true"
+                          >
+                            <circle cx="12" cy="12" r="2.2" />
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="9.2"
+                              ry="3.8"
+                              transform="rotate(0 12 12)"
+                            />
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="9.2"
+                              ry="3.8"
+                              transform="rotate(60 12 12)"
+                            />
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="9.2"
+                              ry="3.8"
+                              transform="rotate(120 12 12)"
+                            />
+                          </svg>
+                        )}
+                        {card.icon === "flutter" && (
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="skill-icon"
+                            aria-hidden="true"
+                          >
+                            <path d="M14 2L3 13l3.5 3.5L20 3h-6z" />
+                            <path d="M14 13l-4 4 4 4h6l-6-6 6-6h-6z" />
+                          </svg>
+                        )}
+                      </div>
+                      <div className="skill-title-group">
+                        <h3 className="skill-heading">
+                          <span
+                            className="skill-accent-wrap"
+                            style={
+                              {
+                                "--accent-line-color": card.accentColor,
+                              } as React.CSSProperties
+                            }
+                          >
+                            {card.titleAccent}
+                          </span>
+                        </h3>
+                        <div className="skill-second-line">
+                          {card.titleSecondLine}
+                        </div>
+                      </div>
+                    </div>
 
-          <div className="subsection">
-            <h3>{content.work.techStackTitle}</h3>
-            <div className="stack-list">
-              {content.techStack.map((group) => (
-                <article className="stack-row" key={group.title}>
-                  <h4>{group.title}</h4>
-                  <p>{group.items.join(" / ")}</p>
-                </article>
-              ))}
+                    <div className="skill-ide-body">
+                      <div className="skill-code-tag" aria-hidden="true">
+                        &lt;h3&gt;
+                      </div>
+
+                      <div className="skill-code-content">
+                        <p className="skill-desc-text">{card.description}</p>
+
+                        <div
+                          className="skill-primary-highlight-box"
+                          aria-label="Kỹ năng chính"
+                        >
+                          <span className="skill-primary-label">
+                            {locale === "vi" ? "Kỹ năng chính:" : "Core Stack:"}
+                          </span>
+                          <div className="skill-primary-tags">
+                            {card.primarySkills.map((tech) => (
+                              <span className="primary-skill-badge" key={tech}>
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="skill-sub-list">
+                          {card.subSkills.map((sub, idx) => (
+                            <div className="skill-sub-item" key={idx}>
+                              <span className="skill-sub-label">
+                                {sub.label}:
+                              </span>{" "}
+                              <span className="skill-sub-val">{sub.items}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="skill-code-tag" aria-hidden="true">
+                        &lt;/h3&gt;
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            {/* Real Syntax Highlighted HTML Watermark Background placed BELOW the boxes */}
+            <div className="skills-ide-watermark-bottom" aria-hidden="true">
+              <div className="code-line">
+                <span className="syn-tag">&lt;html</span>{" "}
+                <span className="syn-attr">lang</span>=
+                <span className="syn-str">&quot;en&quot;</span>
+                <span className="syn-tag">&gt;</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="syn-tag">&lt;head&gt;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;meta</span>{" "}
+                <span className="syn-attr">name</span>=
+                <span className="syn-str">&quot;viewport&quot;</span>{" "}
+                <span className="syn-attr">content</span>=
+                <span className="syn-str">
+                  &quot;width=device-width, initial-scale=1.0&quot;
+                </span>
+                <span className="syn-tag">&gt;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;title&gt;</span>
+                <span className="syn-dim">What do I do</span>
+                <span className="syn-tag">&lt;/title&gt;</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="syn-tag">&lt;/head&gt;</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="syn-tag">&lt;body&gt;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;h1&gt;</span>
+                <span className="syn-dim">
+                  Things I do to get a perfect background image
+                </span>
+                <span className="syn-tag">&lt;/h1&gt;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;p&gt;</span>
+              </div>
+              <div className="code-line indent-3">
+                <span className="syn-dim">
+                  Maybe I should stop tinkering with VSCode settings just to
+                  take a screenshot of this dummy html code.
+                </span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;/p&gt;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;span&gt;</span>
+              </div>
+              <div className="code-line indent-3">
+                <span className="syn-dim">
+                  Oops, Almost forgot to say &quot;Hello World!&quot;!
+                </span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="syn-tag">&lt;/span&gt;</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="syn-tag">&lt;/body&gt;</span>
+              </div>
+              <div className="code-line">
+                <span className="syn-tag">&lt;/html&gt;</span>
+              </div>
             </div>
           </div>
         </section>
@@ -353,7 +572,12 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
                     ))}
                   </div>
                   {item.href ? (
-                    <a className="text-link" href={item.href} target="_blank" rel="noreferrer">
+                    <a
+                      className="text-link"
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {item.href.replace("https://", "")}
                     </a>
                   ) : null}
@@ -379,9 +603,68 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
               ))}
             </div>
           </div>
+
+          {content.education && content.education.length > 0 && (
+            <div className="subsection">
+              <h3>{content.work.educationTitle}</h3>
+              <div className="experience-list">
+                {content.education.map((item) => (
+                  <article className="experience-item" key={item.institution}>
+                    <div>
+                      <h4>{item.institution}</h4>
+                      <p>{item.degree}</p>
+                    </div>
+                    <div>
+                      <span>{item.period}</span>
+                      <p>
+                        {item.gpa} • {item.english}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {content.certificates && content.certificates.length > 0 && (
+            <div className="subsection">
+              <h3>{content.work.certificatesTitle}</h3>
+              <div className="experience-list">
+                {content.certificates.map((cert) => (
+                  <article className="experience-item" key={cert.title}>
+                    <div>
+                      <h4>{cert.title}</h4>
+                      <p>{cert.issuer}</p>
+                    </div>
+                    <div>
+                      <span>{cert.issueDate}</span>
+                      {cert.credentialUrl ? (
+                        <p>
+                          <a
+                            className="text-link"
+                            href={cert.credentialUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {locale === "vi"
+                              ? "Xem chứng chỉ"
+                              : "View Certificate"}
+                          </a>
+                        </p>
+                      ) : null}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
-        <section id="contact" className="section split-section contact-section" aria-labelledby="contact-title">
+        <section
+          id="contact"
+          className="section split-section contact-section"
+          aria-labelledby="contact-title"
+        >
           <div className="section-heading">
             <h2 id="contact-title">{content.contact.title}</h2>
           </div>
@@ -397,7 +680,11 @@ export function PortfolioPage({ locale }: PortfolioPageProps) {
               <div>
                 <dt>{content.contact.githubLabel}</dt>
                 <dd>
-                  <a href={contactLinks.github} target="_blank" rel="noreferrer">
+                  <a
+                    href={contactLinks.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {contactLinks.githubText}
                   </a>
                 </dd>

@@ -1,4 +1,4 @@
-                export type Locale = "vi" | "en";
+export type Locale = "vi" | "en";
 
 type NavItem = {
   label: string;
@@ -8,6 +8,22 @@ type NavItem = {
 type SkillGroup = {
   title: string;
   items: string[];
+};
+
+export type SubSkillItem = {
+  label: string;
+  items: string;
+};
+
+export type SkillCard = {
+  id: string;
+  icon: "monitor" | "react" | "flutter" | "terminal";
+  titleAccent: string;
+  titleSecondLine: string;
+  accentColor: string;
+  description: string;
+  primarySkills: string[];
+  subSkills: SubSkillItem[];
 };
 
 type WorkItem = {
@@ -25,6 +41,21 @@ type ExperienceItem = {
   period: string;
   role: string;
   summary: string;
+};
+
+export type EducationItem = {
+  institution: string;
+  degree: string;
+  period: string;
+  gpa: string;
+  english: string;
+};
+
+export type CertificateItem = {
+  title: string;
+  issuer: string;
+  issueDate?: string;
+  credentialUrl?: string;
 };
 
 type AboutStat = {
@@ -65,11 +96,16 @@ type PortfolioContent = {
     techStackTitle: string;
     selectedWorkTitle: string;
     experienceTitle: string;
+    educationTitle: string;
+    certificatesTitle: string;
   };
+  skillCards: SkillCard[];
   skillGroups: SkillGroup[];
   techStack: SkillGroup[];
   workItems: WorkItem[];
   experience: ExperienceItem[];
+  education: EducationItem[];
+  certificates: CertificateItem[];
   about: {
     title: string;
     summary: string;
@@ -103,9 +139,9 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     alternatePath: "/en",
     alternateLabel: "English",
     seo: {
-      title: "Lê Quang Toàn | Full-stack Web Fresher",
+      title: "Lê Quang Toàn | Full-stack Web & Desktop Developer",
       description:
-        "Portfolio của Lê Quang Toàn, lập trình viên Full-stack Web Fresher tập trung vào React, Next.js, Vue, Node.js và ứng dụng desktop automation.",
+        "Portfolio của Lê Quang Toàn - Lập trình viên Full-stack Web & Desktop App tại Đà Nẵng, chuyên xây dựng sản phẩm tối ưu hiệu năng với React, Next.js, Vue, Node.js và Electron.",
     },
     nav: [
       { label: "Trang Chủ", href: "/#home" },
@@ -115,95 +151,304 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       { label: "Liên Hệ", href: "/#contact" },
     ],
     hero: {
-      eyebrow: "Full-stack Web Fresher",
+      eyebrow: "Full-stack Web & Desktop Developer",
       title: "Lê Quang Toàn",
       summary:
-        "Lập trình viên Full-stack Web Fresher tại Đà Nẵng, tập trung xây dựng web app và desktop app có kiến trúc rõ ràng, dễ bảo trì và gắn với trải nghiệm người dùng.",
+        "Lập trình viên Full-stack tại Đà Nẵng, chuyên xây dựng web app và desktop app có kiến trúc rõ ràng, dễ bảo trì và tối ưu trải nghiệm người dùng.",
       primaryCta: "Xem công việc",
-      secondaryCta: "Liên hệ",
+      secondaryCta: "Liên hệ ngay",
     },
     skills: {
-      title: "Kỹ Năng",
+      title: "Kỹ Năng Của Tôi",
       summary:
-        "Các kỹ năng chuyên môn và công nghệ tôi sử dụng trong quá trình phát triển sản phẩm web, backend và ứng dụng desktop.",
+        "Tổng hợp kỹ năng chuyên sâu và công nghệ sử dụng trong quá trình phát triển sản phẩm web, hệ thống backend và ứng dụng desktop automation.",
     },
     work: {
       title: "Dự Án",
       summary:
-        "Kinh nghiệm của tôi nằm ở giao điểm giữa frontend hiện đại, backend Node.js và các workflow desktop automation cần tính ổn định trong môi trường sản phẩm thật.",
+        "Kinh nghiệm thực tế từ phát triển frontend hiện đại, backend Node.js đến các ứng dụng desktop automation cần tính ổn định cao.",
       coreSkillsTitle: "Kỹ năng chính",
       techStackTitle: "Tech Stack",
       selectedWorkTitle: "Dự án tiêu biểu",
-      experienceTitle: "Kinh nghiệm",
+      experienceTitle: "Kinh nghiệm thực tế",
+      educationTitle: "Học vấn",
+      certificatesTitle: "Chứng chỉ chuyên môn",
     },
+    skillCards: [
+      {
+        id: "software",
+        icon: "monitor",
+        titleAccent: "Software",
+        titleSecondLine: "Development",
+        accentColor: "#ec4899",
+        description:
+          "Thành thạo xây dựng hệ thống backend linh hoạt và bảo mật. Ưu tiên cấu trúc code rõ ràng (MVC, Repository Pattern), tối ưu hóa cơ sở dữ liệu và thiết kế RESTful APIs dễ mở rộng.",
+        primarySkills: [
+          "Node.js",
+          "Express 5",
+          "TypeScript",
+          "RESTful API",
+          "Casbin",
+        ],
+        subSkills: [
+          {
+            label: "Xác thực & Bảo mật",
+            items:
+              "JWT, OAuth 2.0, Casbin (RBAC/ABAC IAM), Mã hóa AES-256-GCM, Rate Limiting",
+          },
+          {
+            label: "Realtime & Data Pipeline",
+            items:
+              "Socket.io (Websocket), Cloudinary API, Webhooks, Background Queue",
+          },
+          {
+            label: "Cơ sở dữ liệu",
+            items:
+              "PostgreSQL, SQLite local, MongoDB, Supabase, Prisma/ORM, Repository Pattern",
+          },
+          {
+            label: "DevOps, Arch & QA",
+            items:
+              "Docker, CI/CD GitHub Actions, Vercel, Render, E2E & Unit Testing, Postman",
+          },
+        ],
+      },
+      {
+        id: "frontend",
+        icon: "react",
+        titleAccent: "Frontend Dev",
+        titleSecondLine: "React, NextJS, Vue",
+        accentColor: "#38bdf8",
+        description:
+          "Chuyên phát triển giao diện hiện đại, phản hồi mượt mà trên mọi thiết bị và tối ưu tốc độ tải trang cực nhanh với hệ sinh thái React 19, Next.js và Vue 3.",
+        primarySkills: [
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "TypeScript",
+          "Tailwind CSS",
+        ],
+        subSkills: [
+          {
+            label: "Quản lý State & Forms",
+            items:
+              "Zustand, Redux Toolkit, Pinia, TanStack Query (React Query), Context API, Zod",
+          },
+          {
+            label: "Giao diện & Đồ họa Workflow",
+            items:
+              "Tailwind CSS 4, Vue Flow, ELK.js, CSS Modules, Responsive Design, Web Vitals, SEO/GEO",
+          },
+          {
+            label: "Nền tảng kỹ thuật",
+            items:
+              "JavaScript (ES6+), TypeScript, HTML5/CSS3, Component-driven Architecture, Vite",
+          },
+        ],
+      },
+      {
+        id: "desktop",
+        icon: "flutter",
+        titleAccent: "Desktop Dev",
+        titleSecondLine: "Electron, Automation",
+        accentColor: "#f97316",
+        description:
+          "Chuyên môn phát triển ứng dụng desktop đa nền tảng và pipeline tự động hóa (Automation) giúp tối ưu hóa quy trình làm việc và tiết kiệm hàng giờ thao tác thủ công.",
+        primarySkills: ["Electron 40", "Puppeteer", "Playwright", "FFmpeg"],
+        subSkills: [
+          {
+            label: "Tự động hóa & Scraping",
+            items:
+              "Puppeteer, Playwright, Chrome DevTools Protocol (CDP), Anti-detect Profile, Custom Chromium",
+          },
+          {
+            label: "Đa tiến trình & Media Pipeline",
+            items:
+              "Electron Child Processes, Worker Threads, Soft Distributed Lock, Auto-sync Queue, FFmpeg",
+          },
+          {
+            label: "Đóng gói & Vận hành",
+            items:
+              "Docker, GitHub Actions CI/CD, SQLite local mã hóa, Multi-window, Windows Installer & Auto-update",
+          },
+        ],
+      },
+    ],
     skillGroups: [
       {
         title: "Frontend product UI",
-        items: ["React", "Next.js", "Vue", "TypeScript", "Tailwind CSS", "State management"],
+        items: [
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "Pinia",
+          "TypeScript",
+          "Tailwind CSS 4",
+          "Zustand",
+          "React Query",
+          "Zod",
+        ],
       },
       {
         title: "Backend and APIs",
-        items: ["Node.js", "Express", "REST API", "JWT", "Socket.io", "Authorization"],
+        items: [
+          "Node.js",
+          "Express 5",
+          "REST API",
+          "JWT",
+          "Casbin (IAM)",
+          "Socket.io",
+          "AES-256 Encryption",
+          "Repository Pattern",
+        ],
       },
       {
         title: "Desktop automation",
-        items: ["Electron", "Puppeteer", "Playwright", "CDP", "FFmpeg", "Local data"],
+        items: [
+          "Electron 40",
+          "Puppeteer",
+          "Playwright",
+          "CDP",
+          "FFmpeg",
+          "GravBrowser",
+          "Anti-detect Profile",
+          "Child Processes",
+        ],
       },
     ],
     techStack: [
       {
         title: "Frontend",
-        items: ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Vue", "React Query", "Zustand"],
+        items: [
+          "HTML5",
+          "CSS3",
+          "Tailwind CSS 4",
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "Pinia",
+          "Zustand",
+          "React Query",
+          "Zod",
+          "Vite",
+          "Vue Flow",
+          "ELK.js",
+        ],
       },
       {
-        title: "Backend",
-        items: ["TypeScript", "Node.js", "Express", "JWT", "Socket.io", "Cloudinary", "Casbin"],
+        title: "Backend & Security",
+        items: [
+          "TypeScript",
+          "Node.js",
+          "Express 5",
+          "JWT",
+          "Casbin (RBAC/ABAC)",
+          "Socket.io",
+          "Cloudinary",
+          "AES-256-GCM",
+          "PBKDF2",
+          "Repository Pattern",
+        ],
       },
       {
-        title: "Data and tools",
-        items: ["PostgreSQL", "SQLite", "MongoDB", "Supabase", "Docker", "GitHub Actions", "Vercel"],
+        title: "Desktop & Automation",
+        items: [
+          "Electron 40",
+          "Puppeteer",
+          "Playwright",
+          "CDP",
+          "Custom Chromium Launcher",
+          "GravBrowser",
+          "FFmpeg",
+          "Child Processes",
+          "Auto-update",
+        ],
+      },
+      {
+        title: "Data, Tools & Testing",
+        items: [
+          "PostgreSQL",
+          "SQLite",
+          "MongoDB",
+          "Supabase",
+          "Docker",
+          "GitHub Actions",
+          "Vercel",
+          "Render",
+          "Postman",
+          "E2E Testing",
+          "Unit Testing",
+        ],
       },
     ],
     workItems: [
       {
         title: "Invibrowser",
         period: "05/2026 - 08/2026",
-        role: "Fullstack Desktop App",
+        role: "Fullstack Desktop SaaS App",
         summary:
-          "Ứng dụng desktop SaaS cho quản lý browser profiles, đồng bộ cloud, phân quyền theo team và xây dựng workflow trực quan.",
+          "Ứng dụng desktop SaaS giúp quản lý hàng trăm browser profile độc lập, hỗ trợ đồng bộ dữ liệu cloud và phân quyền làm việc nhóm mượt mà.",
         highlights: [
-          "Triển khai soft distributed lock để giảm xung đột profile giữa nhiều thiết bị.",
-          "Xây dựng auto-sync queue nền để đồng bộ folder và trạng thái profile với cloud.",
-          "Thiết kế Visual Workflow Builder bằng Vue Flow và ELK.js.",
+          "Phát triển cơ chế Soft Distributed Lock (Runtime Presence) giúp nhận biết thiết bị đang mở profile, tránh xung đột dữ liệu giữa nhiều máy.",
+          "Xây dựng hàng chờ tự động đồng bộ (Auto-sync Queue) chạy ngầm mượt mà giữa máy local và cloud storage.",
+          "Xây dựng trình kéo thả quy trình làm việc (Visual Workflow Builder) trực quan bằng Vue Flow và ELK.js.",
+          "Phân quyền thành viên nhóm chi tiết theo vai trò và nhóm làm việc bằng Casbin IAM.",
+          "Tổ chức kiến trúc 3 tầng chuẩn chỉnh (Frontend, Runtime, Server) kết hợp Repository Pattern giúp dự án dễ bảo trì lâu dài.",
         ],
-        stack: ["Vue 3", "TypeScript", "Electron", "Node.js", "PostgreSQL", "Casbin"],
+        stack: [
+          "Vue 3",
+          "TypeScript",
+          "Electron 40",
+          "Node.js",
+          "Express 5",
+          "PostgreSQL",
+          "Casbin",
+          "Pinia",
+          "Vue Flow",
+          "ELK.js",
+          "CDP",
+        ],
         href: "https://invibrowser.com",
       },
       {
         title: "1Clickdown",
         period: "10/2025 - 05/2026",
-        role: "Fullstack Desktop App",
+        role: "Fullstack Desktop Automation App",
         summary:
-          "Nền tảng desktop nội bộ cho xử lý media và workflow automation, kết hợp Electron, React, Node.js, SQLite và FFmpeg.",
+          "Công cụ desktop tự động hóa việc xử lý video hàng loạt và thu thập dữ liệu thông minh, giúp tiết kiệm đến 80-90% thời gian thao tác thủ công.",
         highlights: [
-          "Tách các tác vụ nặng sang child processes trong kiến trúc Electron nhiều tiến trình.",
-          "Xây dựng media pipeline bằng FFmpeg cho batch video editing và progress tracking.",
-          "Thiết lập build và release pipeline bằng Docker và GitHub Actions.",
+          "Tách các tác vụ nặng sang child processes độc lập trong kiến trúc Electron đa tiến trình, xử lý mượt mà tới 5 video cùng lúc mà không giật lag.",
+          "Xây dựng media pipeline tự động hóa bằng FFmpeg (cắt ghép, zoom, chèn nhạc, chữ) chỉ với vài cú click.",
+          "Thiết lập kịch bản Puppeteer/CDP kết hợp anti-detect profile để tự động crawl dữ liệu group Facebook và phân tích insights tài khoản.",
+          "Lưu trữ dữ liệu an toàn trên SQLite local theo Repository Pattern và mã hóa chuẩn AES-256-GCM.",
+          "Tự động hóa luồng build và phát hành bộ cài Windows (Signed installer & Auto-update) với Docker và GitHub Actions.",
         ],
-        stack: ["React", "TypeScript", "Electron", "Node.js", "SQLite", "FFmpeg"],
+        stack: [
+          "React 19",
+          "TypeScript",
+          "Electron",
+          "Node.js",
+          "SQLite",
+          "FFmpeg",
+          "Puppeteer",
+          "CDP",
+          "AES-256",
+          "Docker",
+          "GitHub Actions",
+        ],
       },
       {
         title: "Product landing pages",
         period: "2025 - 2026",
         role: "Web Developer",
         summary:
-          "Thiết kế và phát triển landing pages cho Invibrowser.com và Sellnity.com với cấu trúc nội dung thân thiện SEO/GEO.",
+          "Các trang giới thiệu sản phẩm cho Invibrowser.com và Sellnity.com với thiết kế hiện đại, nội dung mạch lạc và tối ưu chuẩn SEO/GEO.",
         highlights: [
-          "Tổ chức nội dung theo product positioning và search intent.",
-          "Xây dựng giao diện web gọn, rõ thông điệp và dễ crawl.",
-          "Tập trung vào performance, responsive layout và khả năng index độc lập.",
+          "Truyền tải rõ nét giá trị sản phẩm và giải quyết đúng nhu cầu của khách hàng.",
+          "Giao diện tinh gọn, phản hồi cực nhanh trên thiết bị di động và tối ưu khả năng index độc lập theo ngôn ngữ.",
+          "Đạt điểm hiệu năng Web Vitals cao, thân thiện với các công cụ tìm kiếm và mô hình AI.",
         ],
-        stack: ["React", "Next.js", "Tailwind CSS", "SEO", "GEO"],
+        stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "SEO", "GEO"],
       },
     ],
     experience: [
@@ -212,62 +457,80 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
         period: "09/2025 - 08/2026",
         role: "Developer Fullstack Web App",
         summary:
-          "Tham gia phát triển web app, desktop app, landing pages và các công cụ automation trong môi trường sản phẩm thực tế.",
+          "Phát triển các bài toán thực tế: ứng dụng web, app desktop SaaS, landing page giới thiệu sản phẩm đến các quy trình tự động hóa thu thập dữ liệu khách hàng tiềm năng cho đội ngũ kinh doanh.",
+      },
+    ],
+    education: [
+      {
+        institution: "Trường Đại học Đông Á",
+        degree: "Cử nhân Công nghệ Thông tin",
+        period: "2021 - 2025",
+        gpa: "GPA: 3.28/4.0 (8.09/10)",
+        english: "Trình độ Tiếng Anh: B1",
+      },
+    ],
+    certificates: [
+      {
+        title: "The Ultimate React Course 2024: React, Next.js, Redux & More",
+        issuer: "Udemy (Giảng viên Jonas Schmedtmann)",
+        issueDate: "2024",
+        credentialUrl:
+          "https://www.udemy.com/certificate/UC-195fc030-2dc0-4e20-8de7-82c733491b11",
       },
     ],
     about: {
       title: "Giới thiệu",
       summary:
-        "Tôi là Fullstack Developer với hơn 1 năm kinh nghiệm, chuyên nhận phát triển các web bán hàng, landing page, web chat nội bộ, app desktop nội bộ, SaaS và tự động hóa quy trình (Automation). Thành thạo các công nghệ như Node.js, React, Next.js, Vue, JavaScript, TypeScript và các công nghệ hiện đại khác.\n\nĐã triển khai thành công nhiều dự án lớn nhỏ như Invibrowser (Trình duyệt Anti-detect), 1Clickdown (nền tảng tự động hóa quy trình) cùng các dự án web đặt phòng, quản lý khách sạn, clone Instagram và landing page khác. Tôi cam kết mang đến giải pháp tối ưu, code chất lượng cao và hỗ trợ tận tình cho mọi dự án.",
+        "Lập trình viên Full-stack với hơn 1 năm kinh nghiệm thực chiến trong phát triển sản phẩm web/app và ứng dụng desktop. Chuyên giải quyết các bài toán công nghệ đa dạng — từ landing page bắt mắt, ứng dụng web giao dịch, hệ thống chat nội bộ cho đến các ứng dụng desktop SaaS và hệ thống tự động hóa (Automation) phức tạp.\n\nĐề cao tinh thần trách nhiệm, chuẩn mực code sạch (Clean Code), tư duy kiến trúc hệ thống bài bản và phối hợp hiệu quả cùng đồng đội. Đã tham gia triển khai thành công các sản phẩm như Invibrowser (trình duyệt anti-detect SaaS), 1Clickdown (nền tảng tự động hóa xử lý media) và nhiều dự án web chất lượng cao.",
       avatarUrl: "/developer-avatar.png",
-      avatarAlt: "Lê Quang Toàn - Full-stack Web Developer",
+      avatarAlt: "Lê Quang Toàn - Full-stack Web & Desktop Developer",
       stats: [
         { value: "1+", label: "Năm Kinh Nghiệm" },
-        { value: "24/7", label: "Hỗ Trợ Liên Tục" },
+        { value: "24/7", label: "Hỗ Trợ & Đồng Hành" },
       ],
-      statusBadge: "Sẵn sàng nhận dự án mới",
+      statusBadge: "Sẵn sàng cho dự án mới",
       tags: ["Fullstack Web", "Desktop SaaS", "Automation", "Clean Code"],
       values: [
         {
           title: "Code Sạch",
           description:
-            "Tôi viết code dễ đọc, dễ bảo trì và có khả năng mở rộng tốt, tuân thủ các nguyên tắc thiết kế hệ thống chuẩn mực.",
+            "Chú trọng viết code dễ đọc, dễ bảo trì và mở rộng lâu dài, tuân thủ các nguyên tắc thiết kế hệ thống chuẩn mực.",
         },
         {
-          title: "Thiết Kế Đẹp",
+          title: "Giao Diện Mượt",
           description:
-            "Tôi tin vào việc tạo ra giao diện người dùng tối ưu UI/UX, thu hút về mặt thị giác và mang lại trải nghiệm mượt mà.",
+            "Tạo ra trải nghiệm người dùng (UI/UX) tinh tế, thu hút về thị giác và tương tác mượt mà trên mọi thiết bị.",
         },
         {
-          title: "Hiệu Suất",
+          title: "Tối Ưu Hiệu Năng",
           description:
-            "Tôi tối ưu hóa tốc độ tải trang, luồng xử lý dữ liệu và tự động hóa các tác vụ phức tạp một cách hiệu quả.",
+            "Tối ưu tốc độ tải trang, luồng xử lý dữ liệu backend và tự động hóa các thao tác lặp đi lặp lại một cách hiệu quả.",
         },
         {
-          title: "Hợp Tác",
+          title: "Làm Việc Nhóm",
           description:
-            "Tôi làm việc tốt trong môi trường nhóm, giao tiếp rõ ràng và chủ động kết nối với các bên liên quan.",
+            "Lắng nghe, giao tiếp cởi mở và chủ động phối hợp với đồng đội để cùng hướng tới mục tiêu chung của sản phẩm.",
         },
         {
-          title: "Đam Mê",
+          title: "Luôn Học Hỏi",
           description:
-            "Tôi đam mê công nghệ và liên tục cập nhật các giải pháp, công nghệ mới nhất để áp dụng vào sản phẩm thực tế.",
+            "Chủ động cập nhật các công nghệ, công cụ và giải pháp kỹ thuật mới nhất để áp dụng hiệu quả vào sản phẩm thực tế.",
         },
         {
-          title: "Sáng Tạo",
+          title: "Tư Duy Sáng Tạo",
           description:
-            "Tôi yêu thích thử thách, giải quyết các bài toán kỹ thuật phức tạp và đưa ra giải pháp sáng tạo, tối ưu.",
+            "Thích chinh phục những bài toán khó, không ngại thử thách kỹ thuật và tìm ra giải pháp tối ưu nhất cho bài toán.",
         },
       ],
     },
     contact: {
       title: "Liên hệ",
       summary:
-        "Nếu bạn cần một fresher full-stack có nền tảng React, Vue, Node.js và kinh nghiệm sản phẩm desktop automation, hãy kết nối với tôi.",
+        "Cần phát triển dự án web app, phần mềm desktop SaaS hoặc công cụ tự động hóa quy trình? Kết nối ngay để cùng trao đổi!",
       emailLabel: "Email",
       githubLabel: "GitHub",
-      locationLabel: "Location",
-      location: "Da Nang, Viet Nam",
+      locationLabel: "Địa điểm",
+      location: "Đà Nẵng, Việt Nam",
     },
     accessibility: {
       mainNavigation: "Điều hướng chính",
@@ -282,9 +545,9 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     alternatePath: "/",
     alternateLabel: "Tiếng Việt",
     seo: {
-      title: "Le Quang Toan | Full-stack Web Fresher",
+      title: "Le Quang Toan | Full-stack Web & Desktop Developer",
       description:
-        "Portfolio of Le Quang Toan, a Full-stack Web Fresher focused on React, Next.js, Vue, Node.js, and automation-heavy desktop applications.",
+        "Portfolio of Le Quang Toan - Full-stack Web & Desktop Developer based in Da Nang, crafting performant applications with React, Next.js, Vue, Node.js, and Electron.",
     },
     nav: [
       { label: "Home", href: "/en#home" },
@@ -294,12 +557,12 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       { label: "Contact", href: "/en#contact" },
     ],
     hero: {
-      eyebrow: "Full-stack Web Fresher",
+      eyebrow: "Full-stack Web & Desktop Developer",
       title: "Le Quang Toan",
       summary:
-        "A Full-stack Web Fresher based in Da Nang, focused on building maintainable web and desktop applications with clear architecture and thoughtful user experience.",
+        "Full-stack Developer based in Da Nang, focused on building maintainable web and desktop applications with clean architecture.",
       primaryCta: "View work",
-      secondaryCta: "Contact",
+      secondaryCta: "Get in touch",
     },
     skills: {
       title: "Skills",
@@ -309,80 +572,289 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     work: {
       title: "Projects",
       summary:
-        "My experience sits between modern frontend, Node.js backends, and desktop automation workflows that need reliability in real product environments.",
+        "Hands-on experience across modern frontend, Node.js backends, and desktop automation applications.",
       coreSkillsTitle: "Core Skills",
       techStackTitle: "Tech Stack",
-      selectedWorkTitle: "Selected Work",
-      experienceTitle: "Experience",
+      selectedWorkTitle: "Selected Projects",
+      experienceTitle: "Work Experience",
+      educationTitle: "Education",
+      certificatesTitle: "Certifications",
     },
+    skillCards: [
+      {
+        id: "software",
+        icon: "monitor",
+        titleAccent: "Software",
+        titleSecondLine: "Development",
+        accentColor: "#ec4899",
+        description:
+          "Experienced in building secure, flexible backends. Prioritizing clean code architecture (MVC, Repository Pattern), efficient database design, and intuitive RESTful APIs.",
+        primarySkills: [
+          "Node.js",
+          "Express 5",
+          "TypeScript",
+          "RESTful API",
+          "Casbin",
+        ],
+        subSkills: [
+          {
+            label: "Auth & Security",
+            items:
+              "JWT, OAuth 2.0, Casbin (RBAC/ABAC IAM), AES-256-GCM Encryption, Rate Limiting",
+          },
+          {
+            label: "Realtime & Data Pipeline",
+            items:
+              "Socket.io (Websocket), Cloudinary API, Webhooks, Background Queue",
+          },
+          {
+            label: "Databases",
+            items:
+              "PostgreSQL, Local SQLite, MongoDB, Supabase, Prisma/ORM, Repository Pattern",
+          },
+          {
+            label: "DevOps, Arch & QA",
+            items:
+              "Docker, CI/CD GitHub Actions, Vercel, Render, E2E & Unit Testing, Postman",
+          },
+        ],
+      },
+      {
+        id: "frontend",
+        icon: "react",
+        titleAccent: "Frontend Dev",
+        titleSecondLine: "React, NextJS, Vue",
+        accentColor: "#38bdf8",
+        description:
+          "Specialized in bringing designs to life with fluid animations, responsive layouts, and fast loading speeds using React 19, Next.js, and Vue 3.",
+        primarySkills: [
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "TypeScript",
+          "Tailwind CSS",
+        ],
+        subSkills: [
+          {
+            label: "State Management & Forms",
+            items:
+              "Zustand, Redux Toolkit, Pinia, TanStack Query (React Query), Context API, Zod",
+          },
+          {
+            label: "UI Architecture & Workflows",
+            items:
+              "Tailwind CSS 4, Vue Flow, ELK.js, CSS Modules, Responsive Design, Web Vitals, SEO/GEO",
+          },
+          {
+            label: "Core Foundation",
+            items:
+              "JavaScript (ES6+), TypeScript, HTML5/CSS3, Component-driven Architecture, Vite",
+          },
+        ],
+      },
+      {
+        id: "desktop",
+        icon: "flutter",
+        titleAccent: "Desktop Dev",
+        titleSecondLine: "Electron, Automation",
+        accentColor: "#f97316",
+        description:
+          "Focused on building cross-platform desktop SaaS applications and automation pipelines that save users hours of repetitive manual work.",
+        primarySkills: ["Electron 40", "Puppeteer", "Playwright", "FFmpeg"],
+        subSkills: [
+          {
+            label: "Automation & Scraping",
+            items:
+              "Puppeteer, Playwright, Chrome DevTools Protocol (CDP), Anti-detect Profile, Custom Chromium",
+          },
+          {
+            label: "Multi-process & Media Pipeline",
+            items:
+              "Electron Child Processes, Worker Threads, Soft Distributed Lock, Auto-sync Queue, FFmpeg",
+          },
+          {
+            label: "Build & Operations",
+            items:
+              "Docker, GitHub Actions CI/CD, Encrypted Local SQLite, Multi-window, Windows Installer & Auto-update",
+          },
+        ],
+      },
+    ],
     skillGroups: [
       {
         title: "Frontend product UI",
-        items: ["React", "Next.js", "Vue", "TypeScript", "Tailwind CSS", "State management"],
+        items: [
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "Pinia",
+          "TypeScript",
+          "Tailwind CSS 4",
+          "Zustand",
+          "React Query",
+          "Zod",
+        ],
       },
       {
         title: "Backend and APIs",
-        items: ["Node.js", "Express", "REST API", "JWT", "Socket.io", "Authorization"],
+        items: [
+          "Node.js",
+          "Express 5",
+          "REST API",
+          "JWT",
+          "Casbin (IAM)",
+          "Socket.io",
+          "AES-256 Encryption",
+          "Repository Pattern",
+        ],
       },
       {
         title: "Desktop automation",
-        items: ["Electron", "Puppeteer", "Playwright", "CDP", "FFmpeg", "Local data"],
+        items: [
+          "Electron 40",
+          "Puppeteer",
+          "Playwright",
+          "CDP",
+          "FFmpeg",
+          "GravBrowser",
+          "Anti-detect Profile",
+          "Child Processes",
+        ],
       },
     ],
     techStack: [
       {
         title: "Frontend",
-        items: ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Vue", "React Query", "Zustand"],
+        items: [
+          "HTML5",
+          "CSS3",
+          "Tailwind CSS 4",
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "Pinia",
+          "Zustand",
+          "React Query",
+          "Zod",
+          "Vite",
+          "Vue Flow",
+          "ELK.js",
+        ],
       },
       {
-        title: "Backend",
-        items: ["TypeScript", "Node.js", "Express", "JWT", "Socket.io", "Cloudinary", "Casbin"],
+        title: "Backend & Security",
+        items: [
+          "TypeScript",
+          "Node.js",
+          "Express 5",
+          "JWT",
+          "Casbin (RBAC/ABAC)",
+          "Socket.io",
+          "Cloudinary",
+          "AES-256-GCM",
+          "PBKDF2",
+          "Repository Pattern",
+        ],
       },
       {
-        title: "Data and tools",
-        items: ["PostgreSQL", "SQLite", "MongoDB", "Supabase", "Docker", "GitHub Actions", "Vercel"],
+        title: "Desktop & Automation",
+        items: [
+          "Electron 40",
+          "Puppeteer",
+          "Playwright",
+          "CDP",
+          "Custom Chromium Launcher",
+          "GravBrowser",
+          "FFmpeg",
+          "Child Processes",
+          "Auto-update",
+        ],
+      },
+      {
+        title: "Data, Tools & Testing",
+        items: [
+          "PostgreSQL",
+          "SQLite",
+          "MongoDB",
+          "Supabase",
+          "Docker",
+          "GitHub Actions",
+          "Vercel",
+          "Render",
+          "Postman",
+          "E2E Testing",
+          "Unit Testing",
+        ],
       },
     ],
     workItems: [
       {
         title: "Invibrowser",
         period: "05/2026 - 08/2026",
-        role: "Fullstack Desktop App",
+        role: "Fullstack Desktop SaaS App",
         summary:
-          "A desktop SaaS application for browser profile management, cloud synchronization, team authorization, and visual workflow building.",
+          "A desktop SaaS app for managing isolated browser profiles, featuring seamless cloud auto-sync and granular multi-tenant team permissions.",
         highlights: [
-          "Implemented a soft distributed lock to reduce profile conflicts across devices.",
-          "Built a background auto-sync queue for profile folders and cloud state.",
-          "Designed a Visual Workflow Builder with Vue Flow and ELK.js.",
+          "Engineered a Soft Distributed Lock mechanism using Runtime Presence to detect and prevent profile data conflicts across devices.",
+          "Built a seamless background Auto-sync Queue for keeping profile folders in sync between local storage and cloud servers.",
+          "Designed an intuitive drag-and-drop Visual Workflow Builder using Vue Flow and ELK.js.",
+          "Implemented fine-grained multi-tenant access control based on user roles and teams with Casbin IAM.",
+          "Structured a clean 3-tier architecture (Frontend, Runtime, Server) paired with the Repository Pattern for long-term maintainability.",
         ],
-        stack: ["Vue 3", "TypeScript", "Electron", "Node.js", "PostgreSQL", "Casbin"],
+        stack: [
+          "Vue 3",
+          "TypeScript",
+          "Electron 40",
+          "Node.js",
+          "Express 5",
+          "PostgreSQL",
+          "Casbin",
+          "Pinia",
+          "Vue Flow",
+          "ELK.js",
+          "CDP",
+        ],
         href: "https://invibrowser.com",
       },
       {
         title: "1Clickdown",
         period: "10/2025 - 05/2026",
-        role: "Fullstack Desktop App",
+        role: "Fullstack Desktop Automation App",
         summary:
-          "An internal desktop platform for media processing and automation workflows, built with Electron, React, Node.js, SQLite, and FFmpeg.",
+          "An internal desktop platform for automated batch video processing and web data harvesting, saving up to 80-90% of manual effort.",
         highlights: [
-          "Separated heavy background tasks into child processes in a multi-process Electron architecture.",
-          "Built an FFmpeg media pipeline for batch video editing and progress tracking.",
-          "Set up build and release workflows with Docker and GitHub Actions.",
+          "Offloaded heavy processing to background child processes in Electron, enabling parallel video rendering (up to 5 streams) with zero UI lag.",
+          "Built an automated FFmpeg media pipeline for batch cutting, zooming, and audio/text overlays in just a few clicks.",
+          "Created Puppeteer/CDP automation scripts integrated with anti-detect profiles for Facebook group crawling and account insights.",
+          "Secured sensitive user data in a local SQLite database using the Repository Pattern and AES-256-GCM encryption.",
+          "Set up automated build pipelines using Docker and GitHub Actions, delivering signed Windows installers and auto-updates.",
         ],
-        stack: ["React", "TypeScript", "Electron", "Node.js", "SQLite", "FFmpeg"],
+        stack: [
+          "React 19",
+          "TypeScript",
+          "Electron",
+          "Node.js",
+          "SQLite",
+          "FFmpeg",
+          "Puppeteer",
+          "CDP",
+          "AES-256",
+          "Docker",
+          "GitHub Actions",
+        ],
       },
       {
         title: "Product landing pages",
         period: "2025 - 2026",
         role: "Web Developer",
         summary:
-          "Designed and developed landing pages for Invibrowser.com and Sellnity.com with SEO/GEO-friendly content structure.",
+          "Product landing pages for Invibrowser.com and Sellnity.com featuring modern design, clear positioning, and SEO/GEO optimization.",
         highlights: [
-          "Organized content around product positioning and search intent.",
-          "Built focused web interfaces with clear messaging and crawlable structure.",
-          "Prioritized performance, responsive layout, and independent indexing.",
+          "Crafted content focused on product value propositions and user search intent.",
+          "Built responsive, lightning-fast web pages optimized for independent multi-language indexing.",
+          "Achieved top Web Vitals scores for enhanced discoverability on search engines and AI search engines.",
         ],
-        stack: ["React", "Next.js", "Tailwind CSS", "SEO", "GEO"],
+        stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "SEO", "GEO"],
       },
     ],
     experience: [
@@ -391,18 +863,36 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
         period: "09/2025 - 08/2026",
         role: "Developer Fullstack Web App",
         summary:
-          "Built web apps, desktop apps, landing pages, and automation tools in a real product environment.",
+          "Hands-on product development experience: building web apps, desktop SaaS applications, high-converting landing pages, and automated lead generation crawlers for sales teams.",
+      },
+    ],
+    education: [
+      {
+        institution: "Dong A University",
+        degree: "Bachelor of Information Technology",
+        period: "2021 - 2025",
+        gpa: "GPA: 3.28/4.0 (8.09/10)",
+        english: "English Level: B1",
+      },
+    ],
+    certificates: [
+      {
+        title: "The Ultimate React Course 2024: React, Next.js, Redux & More",
+        issuer: "Udemy (Instructor Jonas Schmedtmann)",
+        issueDate: "2024",
+        credentialUrl:
+          "https://www.udemy.com/certificate/UC-195fc030-2dc0-4e20-8de7-82c733491b11",
       },
     ],
     about: {
       title: "About",
       summary:
-        "I am a Full-stack Developer with over 1 year of experience, specializing in custom development of e-commerce platforms, landing pages, internal chat systems, desktop SaaS applications, and workflow automation. Proficient in modern technologies including Node.js, React, Next.js, Vue, JavaScript, and TypeScript.\n\nI have successfully delivered diverse projects such as Invibrowser (Anti-detect browser), 1Clickdown (workflow automation platform), hotel booking systems, Instagram clones, and high-performance landing pages. I am dedicated to delivering optimal solutions, clean code, and committed support for every project.",
+        "Full-stack Developer with over 1 year of hands-on product experience in web, app, and desktop software development. Specialized in technical problem-solving across diverse domains — from eye-catching landing pages, custom e-commerce web apps, and internal chat platforms to complex desktop SaaS tools and automation pipelines.\n\nCommitted to strong ownership, clean code standards, disciplined system architecture, and effective team collaboration. Successfully delivered production-ready software including Invibrowser (Anti-detect browser SaaS) and 1Clickdown (media automation platform).",
       avatarUrl: "/developer-avatar.png",
-      avatarAlt: "Le Quang Toan - Full-stack Web Developer",
+      avatarAlt: "Le Quang Toan - Full-stack Web & Desktop Developer",
       stats: [
         { value: "1+", label: "Years Experience" },
-        { value: "24/7", label: "Dedicated Support" },
+        { value: "24/7", label: "Support & Dedication" },
       ],
       statusBadge: "Available for new projects",
       tags: ["Fullstack Web", "Desktop SaaS", "Automation", "Clean Code"],
@@ -410,39 +900,39 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
         {
           title: "Clean Code",
           description:
-            "I write readable, scalable, and maintainable code adhering to solid system design principles.",
+            "Prioritizing readable, scalable, and maintainable code adhering to solid system design principles.",
         },
         {
-          title: "Beautiful Design",
+          title: "Fluid UI/UX",
           description:
-            "I focus on modern UI/UX design, creating visually engaging and intuitive user interfaces.",
+            "Creating visually engaging, intuitive, and highly responsive user experiences across all devices.",
         },
         {
           title: "Performance",
           description:
-            "I optimize application loading speed, data processing flows, and background automation tasks.",
+            "Optimizing page load speeds, backend data flows, and background task automation.",
         },
         {
-          title: "Collaboration",
+          title: "Teamwork",
           description:
-            "I thrive in team environments, communicate clearly with stakeholders, and proactively solve issues.",
+            "Active listening, clear communication, and proactive collaboration to drive product goals forward.",
         },
         {
-          title: "Passion",
+          title: "Continuous Growth",
           description:
-            "I am passionate about technology and constantly learn modern techniques to apply to real products.",
+            "Constantly updating skills with modern tools and technical solutions to apply effectively in production.",
         },
         {
-          title: "Creativity",
+          title: "Creative Mindset",
           description:
-            "I enjoy tackling complex technical challenges and finding creative, effective solutions.",
+            "Tackling complex challenges and finding effective, well-engineered solutions.",
         },
       ],
     },
     contact: {
       title: "Contact",
       summary:
-        "If you need a fresher full-stack developer with React, Vue, Node.js, and desktop automation product experience, let us connect.",
+        "Looking for a developer for web apps, desktop SaaS tools, or workflow automation? Let us connect!",
       emailLabel: "Email",
       githubLabel: "GitHub",
       locationLabel: "Location",
